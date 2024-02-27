@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 10vh;
+            margin-top: 30vh;
+        }
+        .form2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#submit").click(function(e){
+                e.preventDefault(); // 폼 전송을 막습니다.
+
+                let formData = {
+                    name: $("#userName").val()
+                };
+
+                let section = document.querySelector(".description");
+                section.textContent = '검색중...';
+
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json",
+                    url: "/user", // 컨트롤러의 경로
+                    data: JSON.stringify(formData),
+                    dataType: 'json',
+                    success: function(response){
+                        console.log(response);
+                        section.textContent = !response['id'] ? '그런 유저 없음!' : response['description'];
+                    },
+                    error: function(e){
+                        section.textContent = '열정 넘치는 프로그래머 2. 성진이 가장 아끼는 찐 맞후임. 정확히 입사 1년 후배. 심지어 같은 국비 학원을 나왔다. ㄷㄷ';
+                        console.log("ERROR: ", e);
+                    }
+                });
+            });
+        });
+    </script>
+    <meta charset="UTF-8">
+    <title>ETL!</title>
+</head>
+<body>
+
+    <form method="post" class="form">
+        <div>
+            <h1>SFDC - RDBMS ETL Server 시작!</h1>
+            <label for="userName">사용자 이름 : </label>
+            <input type="text" id="userName" placeholder = "사용자 이름을 입력해주세요."/>
+            <button id="submit">검색</button>
+        </div>
+    </form>
+    <p class="description form2"></p>
+
+</body>
+</html>
