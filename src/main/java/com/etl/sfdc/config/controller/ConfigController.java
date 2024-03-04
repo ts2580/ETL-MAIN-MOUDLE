@@ -13,19 +13,19 @@ public class ConfigController {
 
     private final ConfigService configService;
 
-    @PostMapping("/user")
+    /*@PostMapping("/user")
     public User hello(@RequestBody Map<String, Object> map) {
 
         User user = new User();
 
         try {
-            user = configService.getUserDes(String.valueOf(map.get("name")));
+            user = configService.getUserDes(String.valueOf(map.get("userName")));
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
 
         return user;
-    }
+    }*/
 
 
 

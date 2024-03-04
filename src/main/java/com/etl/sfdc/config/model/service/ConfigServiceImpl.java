@@ -11,9 +11,9 @@ public class ConfigServiceImpl implements ConfigService{
 
     private final ConfigRepository configRepository;
 
-    public User getUserDes(String name) {
+    public User getUserDes(String userName) {
 
-        User user = configRepository.getUserDes(name);
+        User user = configRepository.getUserDes(userName);
 
         user = user == null ? new User() : user;
 
