@@ -7,6 +7,8 @@ import java.util.ArrayList;
 @Data
 public class Def {
 
+    // 세일즈포스에서 Object와 Field의 정의 가져올 때 사용
+
     private ObjDef objDef;
     private FieldDef fieldDef;
 

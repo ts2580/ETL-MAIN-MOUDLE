@@ -9,6 +9,6 @@ import java.util.List;
 @Mapper
 public interface ConfigRepository {
 
-    @Select("select * from config.user where name = #{name}")
-    User getUserDes(String name);
+    @Select("select * from config.user where username = #{userName}")
+    User getUserDes(String userName);
 }

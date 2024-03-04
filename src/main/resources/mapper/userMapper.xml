@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.etl.sfdc.user.model.repository.UserRepository">
+
+    <insert id="create" parameterType="com.etl.sfdc.user.model.dto.Member">
+        INSERT INTO config.member(
+            name,
+            username,
+            password,
+            email
+        )
+        VALUES(
+            #{name},
+            #{username},
+            #{password},
+            #{email}
+        )
+    </insert>
+
+</mapper>
+

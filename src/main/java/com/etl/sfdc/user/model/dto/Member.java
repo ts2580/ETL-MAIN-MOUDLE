@@ -1,9 +1,9 @@
-package com.etl.sfdc.config.model.dto;
+package com.etl.sfdc.user.model.dto;
 
 import lombok.Data;
 
 @Data
-public class User {
+public class Member {
     private Integer id;
     private String name;
     private String username;
