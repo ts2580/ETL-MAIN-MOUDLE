@@ -21,6 +21,11 @@ public class UserController {
 
     private final UserService userService;
 
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login_form";
+    }
+
     @ResponseBody
     @PostMapping("/login")
     public Member login(@RequestBody Map<String, Object> map) {
@@ -28,6 +33,9 @@ public class UserController {
         // RestController가 아니므로 @ResponseBody 붙여줘야함
 
         Member member = new Member();
+
+        System.out.println(map);
+        System.out.println("끄에엑");
 
         try {
 
