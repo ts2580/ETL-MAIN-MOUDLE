@@ -2,8 +2,12 @@ package com.etl.sfdc.user.controller;
 
 import com.etl.sfdc.user.model.dto.Member;
 import com.etl.sfdc.user.model.dto.UserCreateForm;
+import com.etl.sfdc.user.model.service.UserSecurityService;
 import com.etl.sfdc.user.model.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,25 +25,30 @@ public class UserController {
 
     private final UserService userService;
 
-    @ResponseBody
-    @PostMapping("/login")
-    public Member login(@RequestBody Map<String, Object> map) {
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login_form";
+    }
 
-        // RestController가 아니므로 @ResponseBody 붙여줘야함
+    @GetMapping("/who")
+    public String loginWho(Model model) {
+
+        // 로그인 성공 후 UserName으로 DB서 정보 조회.
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = (UserDetails)principal;
 
         Member member = new Member();
 
         try {
-
-             String username = String.valueOf(map.get("userName"));
-             String password = String.valueOf(map.get("password"));
-             member = userService.getUserDes(username);
-
+            member = userService.getUserDes(userDetails.getUsername());
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
 
-        return member;
+        model.addAttribute("Member", member);
+
+        return "welcom_form";
     }
 
     @GetMapping("/signup")
@@ -54,6 +63,8 @@ public class UserController {
     @PostMapping("/signup")
     public String signup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult) {
 
+        // signup_form에 객체 바인딩 하기
+
         /*if (bindingResult.hasErrors()) {
             return "signup_form";
         }
@@ -64,7 +75,7 @@ public class UserController {
         }*/
 
         userService.create(userCreateForm.getUsername(),
-                userCreateForm.getEmail(), userCreateForm.getPassword1());
+                userCreateForm.getEmail(), userCreateForm.getPassword1(), userCreateForm.getDescription());
 
         return "redirect:/";
     }
