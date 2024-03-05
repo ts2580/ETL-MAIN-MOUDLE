@@ -10,4 +10,5 @@ public class UserCreateForm {
     private String password1;
     private String password2;
     private String email;
+    private String description;
 }
