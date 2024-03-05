@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class User {
-    @NotNull
+    @NotNull(message = "이름은 필수값 입니다.")
     private Integer id;
 
     @NotNull
