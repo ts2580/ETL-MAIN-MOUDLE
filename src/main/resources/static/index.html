@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="eng">
+<html xmlns:th="http://www.thymeleaf.org" lang="eng">
 <head>
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <style>
@@ -30,8 +30,8 @@
     <div class="login-box">
         <div>
             <h2>세일즈포스 RDBMS ETL 서버 시작!</h2>
-            <div>Have an account? <a href="/user/login">Login</a></div>
-            <div>Don't have an account? <a href="/user/signup">Sign up</a></div>
+            <div>Have an account? <a href="/user/login" th:href="@{/user/login}">Login</a></div>
+            <div>Don't have an account? <a href="/user/signup" th:href="@{/user/signup}">Sign up</a></div>
         </div>
     </div>
 

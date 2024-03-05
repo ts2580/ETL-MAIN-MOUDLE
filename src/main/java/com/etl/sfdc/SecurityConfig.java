@@ -2,6 +2,8 @@ package com.etl.sfdc;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,14 +20,14 @@ public class SecurityConfig {
 
         // Spring Security의 세부 설정은 @Bean 을 통해 SecurityFilterChain Bean을 생성하여 설정 가능
         // new AntPathRequestMatcher("/**")).permitAll()) <- 일단 로그인 없이 모든 페이지에 접근 가능하게 함
-        // formLogin에서 로그인 관련 처리.
+        // formLogin에서 로그인 관련 처리. loginPage에서 지정한 페이지가 로그인 페이지로 지정.
 
         http
                 .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
                         .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/user/login")
-                        .defaultSuccessUrl("/"))
+                        .defaultSuccessUrl("/user/who"))
         ;
         return http.build();
     }
@@ -33,5 +35,10 @@ public class SecurityConfig {
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 }

@@ -57,7 +57,7 @@
             justify-content: center;
             align-items: center;
             min-height: 10vh;
-            margin-top: 30vh;
+            margin-top: 20vh;
         }
 
         .login-box-line{
@@ -84,6 +84,9 @@
                 <br/>
 
                 <input placeholder="이메일" type="email" id="email" th:field="*{email}" />
+                <br/>
+
+                <input placeholder="자기소개" type="text" id="description" th:field="*{description}" />
                 <br/>
 
                 <input type="submit" id="submit">

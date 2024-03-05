@@ -8,13 +8,15 @@
             name,
             username,
             password,
-            email
+            email,
+            description
         )
         VALUES(
             #{name},
             #{username},
             #{password},
-            #{email}
+            #{email},
+            #{description}
         )
     </insert>
 
