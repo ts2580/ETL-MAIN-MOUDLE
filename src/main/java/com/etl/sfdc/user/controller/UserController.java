@@ -69,4 +69,13 @@ public class UserController {
         return "redirect:/";
     }
 
+    @GetMapping("/signup1")
+    public String signup1(Model model) {
+
+        // 폼에 바인딩할 빈 객체를 모델에 추가
+        model.addAttribute("UserCreateForm", new UserCreateForm());
+
+        return "signup_form1";
+    }
+
 }

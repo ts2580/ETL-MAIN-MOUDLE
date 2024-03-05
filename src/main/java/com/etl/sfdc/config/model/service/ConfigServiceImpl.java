@@ -14,7 +14,7 @@ public class ConfigServiceImpl implements ConfigService{
     public User getUserDes(String userName) {
 
         User user = configRepository.getUserDes(userName);
-
+        //이놈의 삼항 자바에선 삼항쓰지맙시다!!
         user = user == null ? new User() : user;
 
         return user;
