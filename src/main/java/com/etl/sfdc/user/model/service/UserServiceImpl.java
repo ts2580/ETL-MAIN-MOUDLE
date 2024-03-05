@@ -21,11 +21,12 @@ public class UserServiceImpl implements UserService{
         return member;
     }
 
-    public Member create(String username, String email, String password) {
+    public Member create(String username, String email, String password, String description) {
         Member member = new Member();
         member.setUsername(username);
         member.setName(username);
         member.setEmail(email);
+        member.setDescription(description);
         member.setPassword(passwordEncoder.encode(password));
         this.userRepository.create(member);
         return member;

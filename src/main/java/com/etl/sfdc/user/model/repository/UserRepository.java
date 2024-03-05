@@ -12,6 +12,6 @@ public interface UserRepository {
     Member getUserDes(String userName);
     void create(Member member);
 
-    @Select("select * from config.member where username = #{userName}")
+    @Select("select * from config.member where username = #{username}")
     Optional<Member> findByUsername(String username);
 }

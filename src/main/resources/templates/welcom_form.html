@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="eng">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security" lang="eng">
 <head>
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
@@ -77,19 +77,12 @@
 
     <div class="login-box">
         <div class="login-wrapper">
-            <h2>Login</h2>
-            <div th:if="${param.error}">
-                <div class="alert">
-                    사용자ID 또는 비밀번호를 확인해 주세요.
-                </div>
-            </div>
-            <!--/user/login 받는 POST 메서드 필요 없음. SecurityConfig에 로그인 페이지로 지정했기 때문에 알아서 UserSecurityService로 납치해감-->
-            <form method="post" id="login-form" th:action="@{/user/login}">
-                <input type="text" name="username" id="username" placeholder="아이디">
-                <input type="password" name="password" id="password" placeholder="비밀번호">
-                <input type="submit" id="submit">
-            </form>
-            <p>Don't have an account? <a href="/user/signup">Sign up</a></p>
+            <h2>환영합니다!</h2>
+            <ul>
+                <li sec:authorize="isAuthenticated()">[[${Member.getUsername()}]]([[${Member.getDescription}]]) 인증 되었습니다</li>
+                <li sec:authorize="hasAuthority('ROLE_ADMIN')">당신의 권한은 "관리자"입니다</li>
+                <li sec:authorize="hasAuthority('ROLE_USER')">당신의 권한은 "사용자"입니다</li>
+            </ul>
         </div>
     </div>
 
