@@ -10,6 +10,8 @@ import java.util.Optional;
 public interface UserRepository {
     @Select("select * from config.member where username = #{userName}")
     Member getUserDes(String userName);
-
     void create(Member member);
+
+    @Select("select * from config.member where username = #{userName}")
+    Optional<Member> findByUsername(String username);
 }
