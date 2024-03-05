@@ -11,9 +11,11 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class ConfigController {
 
-    private final ConfigService configService;
+    private final ConfigService configService    ;//as
 
-    /*@PostMapping("/user")
+
+
+    @PostMapping("/user")
     public User hello(@RequestBody Map<String, Object> map) {
 
         User user = new User();
@@ -25,7 +27,7 @@ public class ConfigController {
         }
 
         return user;
-    }*/
+    }
 
 
 
