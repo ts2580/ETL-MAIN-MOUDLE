@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="eng">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security" lang="eng">
 <head>
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <style>
@@ -32,6 +32,7 @@
             <h2>세일즈포스 RDBMS ETL 서버 시작!</h2>
             <div>Have an account? <a href="/user/login" th:href="@{/user/login}">Login</a></div>
             <div>Don't have an account? <a href="/user/signup" th:href="@{/user/signup}">Sign up</a></div>
+            <li sec:authorize="isAuthenticated()">[[${Member.getUsername()}]]([[${Member.getDescription}]]) 인증 되었습니다</li>
         </div>
     </div>
 
