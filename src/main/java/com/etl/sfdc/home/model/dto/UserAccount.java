@@ -4,10 +4,7 @@ import lombok.Data;
 import org.springframework.security.core.userdetails.User;
 
 @Data
-public class Member {
-
-
-
+public class UserAccount {
     private Integer id;
     private String name;
     private String username;
