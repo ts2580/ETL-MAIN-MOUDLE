@@ -1,10 +1,14 @@
 package com.etl.sfdc.user.controller;
 
 import com.etl.sfdc.user.model.dto.Member;
+import com.etl.sfdc.user.model.dto.UserAccount;
 import com.etl.sfdc.user.model.dto.UserCreateForm;
 import com.etl.sfdc.user.model.service.UserSecurityService;
 import com.etl.sfdc.user.model.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,27 +32,6 @@ public class UserController {
     @GetMapping("/login")
     public String loginPage() {
         return "login_form";
-    }
-
-    @GetMapping("/who")
-    public String loginWho(Model model) {
-
-        // 로그인 성공 후 UserName으로 DB서 정보 조회.
-
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDetails userDetails = (UserDetails)principal;
-
-        Member member = new Member();
-
-        try {
-            member = userService.getUserDes(userDetails.getUsername());
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-
-        model.addAttribute("Member", member);
-
-        return "welcom_form";
     }
 
     @GetMapping("/signup")
@@ -78,15 +61,6 @@ public class UserController {
                 userCreateForm.getEmail(), userCreateForm.getPassword1(), userCreateForm.getDescription());
 
         return "redirect:/";
-    }
-
-    @GetMapping("/signup1")
-    public String signup1(Model model) {
-
-        // 폼에 바인딩할 빈 객체를 모델에 추가
-        model.addAttribute("UserCreateForm", new UserCreateForm());
-
-        return "signup_form1";
     }
 
 }
