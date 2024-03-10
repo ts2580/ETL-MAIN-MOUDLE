@@ -13,4 +13,14 @@ public class Token {
     private String token_type;
     private String issued_at;
     private String signature;
+
+    private String type;
+    private String cltId;
+    private String cltSert;
+    private String userNm;
+    private String userPw;
+    private String apiUrl;
+    private String orgType;
+    private String tokenId;
+
 }
