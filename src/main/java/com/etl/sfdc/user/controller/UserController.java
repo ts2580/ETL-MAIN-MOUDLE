@@ -62,9 +62,6 @@ public class UserController {
             return "signup_form";
         }*/
         //TEST 삭제 필요.확인용 yk.kim
-        Token token = new Token();
-        token = tokenService.getToken(token);
-        System.out.println("token>>>" + token);
 
         userService.create(userCreateForm.getUsername(),
                 userCreateForm.getEmail(), userCreateForm.getPassword1(), userCreateForm.getDescription());

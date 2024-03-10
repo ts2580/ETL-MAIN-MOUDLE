@@ -26,6 +26,7 @@ public class SecurityConfig {
         // new AntPathRequestMatcher("/**")).permitAll()) <- 일단 로그인 없이 모든 페이지에 접근 가능하게 함
         // formLogin에서 로그인 관련 처리. loginPage에서 지정한 페이지가 로그인 페이지로 지정.
         // sessionManagement에서 세션 정책 처리. 커스텀 정책인 userSessionExpiredStrategy로 보냄
+        //  sessionRegistry를 해야 세션사용자(SessionInformation)를 모니터링 가능
 
         http
                 .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
