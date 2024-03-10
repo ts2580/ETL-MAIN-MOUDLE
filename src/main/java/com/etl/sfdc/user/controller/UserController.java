@@ -1,10 +1,14 @@
 package com.etl.sfdc.user.controller;
 
+import com.etl.sfdc.config.common.Auth;
+import com.etl.sfdc.config.model.dto.Token;
+import com.etl.sfdc.config.model.service.TokenService;
 import com.etl.sfdc.user.model.dto.Member;
 import com.etl.sfdc.user.model.dto.UserAccount;
 import com.etl.sfdc.user.model.dto.UserCreateForm;
 import com.etl.sfdc.user.model.service.UserSecurityService;
 import com.etl.sfdc.user.model.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +32,7 @@ import java.util.Optional;
 public class UserController {
 
     private final UserService userService;
+    private final TokenService tokenService;
 
     @GetMapping("/login")
     public String loginPage() {
@@ -44,7 +49,7 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public String signup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult) {
+    public String signup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult) throws JsonProcessingException {
 
         // signup_form에 객체 바인딩 하기
 
@@ -56,6 +61,10 @@ public class UserController {
             bindingResult.rejectValue("password2", "passwordInCorrect", "2개의 패스워드가 일치하지 않습니다.");
             return "signup_form";
         }*/
+        //TEST 삭제 필요.확인용 yk.kim
+        Token token = new Token();
+        token = tokenService.getToken(token);
+        System.out.println("token>>>" + token);
 
         userService.create(userCreateForm.getUsername(),
                 userCreateForm.getEmail(), userCreateForm.getPassword1(), userCreateForm.getDescription());
