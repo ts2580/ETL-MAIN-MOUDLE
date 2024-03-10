@@ -62,36 +62,38 @@
             color: #999999;
         }
 
-        .alert{
+        .alert > div{
             color: fuchsia;
             margin-bottom: 5px;
         }
 
     </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <meta charset="UTF-8">
     <title>ETL!</title>
 </head>
 <body>
 
-    <div class="login-box">
-        <div class="login-wrapper">
-            <h2>Login</h2>
-            <div th:if="${param.error}">
-                <div class="alert">
-                    사용자ID 또는 비밀번호를 확인해 주세요.
-                </div>
+<div class="login-box">
+    <div class="login-wrapper">
+        <h2>Login</h2>
+        <div th:if="${param.error}" class="alert">
+            <div th:if="${param.error.contains('login')}" >
+                사용자ID 또는 비밀번호를 확인해 주세요.
             </div>
-            <!--/user/login 받는 POST 메서드 필요 없음. SecurityConfig에 로그인 페이지로 지정했기 때문에 알아서 UserSecurityService로 납치해감-->
-            <form method="post" id="login-form" th:action="@{/user/login}">
-                <input type="text" name="username" id="username" placeholder="아이디">
-                <input type="password" name="password" id="password" placeholder="비밀번호">
-                <input type="submit" id="submit">
-            </form>
-            <p>Don't have an account? <a href="/user/signup">Sign up</a></p>
+            <div th:if="${param.error.contains('session')}">
+                중복 로그인이 감지되어 세션이 만료되었습니다.
+            </div>
         </div>
+        <!--/user/login 받는 POST 메서드 필요 없음. SecurityConfig에 로그인 페이지로 지정했기 때문에 알아서 UserSecurityService로 납치해감-->
+        <form method="post" id="login-form" th:action="@{/user/login}">
+            <input type="text" name="username" id="username" placeholder="아이디">
+            <input type="password" name="password" id="password" placeholder="비밀번호">
+            <input type="submit" id="submit">
+        </form>
+        <p>Don't have an account? <a href="/user/signup">Sign up</a></p>
     </div>
+</div>
 
 </body>
 </html>
