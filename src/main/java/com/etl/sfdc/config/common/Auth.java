@@ -11,17 +11,19 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Auth {
+public final class Auth {
 
     // todo 나중에 세일즈포스 DB 연결시 사용
 
-    public String getToken() throws JsonProcessingException {
+    public static Token getToken(Token getToken) throws JsonProcessingException {
         Map<String, String> mapParam = new HashMap<>();
-        mapParam.put("grant_type", "password");
-        mapParam.put("client_id", "3MVG95mg0lk4batgePMPvmWhtCkufdqVIgJQ32OkosJzIcwZ4JPTPAHC_jE2sCgyY8E3qwQlPcjdZciFbsRpl");
-        mapParam.put("client_secret", "6D0905503B66B7C161637D352575B3C6D22DF9382048BA4D3A755CE1CB4621A7");
-        mapParam.put("username", "test@aladin.com");
-        mapParam.put("password", "qwer1234!!SdFUcgZVQPrV1ysLMF2YNAEGq");
+        mapParam.put("grant_type", getToken.getType());
+        mapParam.put("client_id", getToken.getCltId());
+        mapParam.put("client_secret", getToken.getCltSert());
+        mapParam.put("username", getToken.getUserNm());
+        mapParam.put("password", getToken.getUserPw());
+
+        System.out.println(">>>>>>>>>>>>>>????????>>>>"+getToken);
 
         StringBuilder urlencoded = new StringBuilder();
 
@@ -41,7 +43,7 @@ public class Auth {
         int readTimeout = 3000;
 
         String sendData = urlencoded.toString();
-        String apiUrl = "https://daeu-4c-dev-ed.my.salesforce.com/services/oauth2/token";
+        String apiUrl = getToken.getApiUrl();
 
         try {
             url = new URL(apiUrl);
@@ -85,8 +87,12 @@ public class Auth {
 
         ObjectMapper mapper = new ObjectMapper();
         Token token = mapper.readValue(buffer.toString(), Token.class);
+        getToken.setTokenId(token.getAccess_token());
+        System.out.println("getToken get Token Id>>>>>>>---------"+getToken.getTokenId());
+        System.out.println("getToken get Token Id>>>>>>>---------"+getToken.getTokenId());
+        System.out.println("getToken get Token Id>>>>>>>---------"+getToken.getTokenId());
 
-        return token.getAccess_token();
+        return getToken;
     }
 
 }
