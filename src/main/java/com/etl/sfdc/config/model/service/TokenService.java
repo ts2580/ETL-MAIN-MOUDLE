@@ -7,4 +7,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 public interface TokenService {
 
     Token getToken(Token setToken) throws JsonProcessingException;
+
+    Token setToken(Token setToken) throws JsonProcessingException;
 }

@@ -8,5 +8,11 @@
         from token_info
     </select>
 
+    <update id="setToken" parameterType="com.etl.sfdc.config.model.dto.Token">
+        UPDATE token_info
+        SET token_id = #{tokenId}
+        WHERE org_type = #{orgType}
+    </update>
+
 </mapper>
 
