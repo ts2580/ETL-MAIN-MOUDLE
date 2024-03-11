@@ -9,4 +9,6 @@ import org.apache.ibatis.annotations.Select;
 public interface TokenRepository {
 
     Token getToken(Token setVo);
+
+    int setToken(Token setVo);
 }

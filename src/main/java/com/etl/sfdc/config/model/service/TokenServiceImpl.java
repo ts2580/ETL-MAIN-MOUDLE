@@ -19,6 +19,15 @@ public class TokenServiceImpl implements TokenService{
         System.out.printf("getVo123123213>>>"+getVo);
         getVo = Auth.getToken(getVo);
 
+        Token returnVo = setToken(getVo);
+
+        return returnVo;
+    }
+
+    public Token setToken(Token setVo) throws JsonProcessingException {
+        setVo.setOrgType("esm");
+        tokenRepository.setToken(setVo);
+        Token getVo =  tokenRepository.getToken(setVo);
         return getVo;
     }
 }
