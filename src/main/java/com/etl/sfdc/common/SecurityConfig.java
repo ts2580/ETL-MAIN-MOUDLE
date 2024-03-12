@@ -1,6 +1,6 @@
-package com.etl.sfdc;
+package com.etl.sfdc.common;
 
-import com.etl.sfdc.user.common.UserSessionExpiredStrategy;
+import com.etl.sfdc.common.UserSessionExpiredStrategy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
