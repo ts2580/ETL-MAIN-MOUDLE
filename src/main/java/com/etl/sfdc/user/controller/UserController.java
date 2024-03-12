@@ -1,30 +1,16 @@
 package com.etl.sfdc.user.controller;
 
-import com.etl.sfdc.config.common.Auth;
-import com.etl.sfdc.config.model.dto.Token;
 import com.etl.sfdc.config.model.service.TokenService;
-import com.etl.sfdc.user.model.dto.Member;
-import com.etl.sfdc.user.model.dto.UserAccount;
 import com.etl.sfdc.user.model.dto.UserCreateForm;
-import com.etl.sfdc.user.model.service.UserSecurityService;
 import com.etl.sfdc.user.model.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
-
-import java.util.Map;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor

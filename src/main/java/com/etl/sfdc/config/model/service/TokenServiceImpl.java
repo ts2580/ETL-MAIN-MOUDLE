@@ -1,7 +1,7 @@
 package com.etl.sfdc.config.model.service;
 
 import com.etl.sfdc.config.model.dto.Token;
-import com.etl.sfdc.config.common.Auth;
+import com.etl.sfdc.common.Auth;
 import com.etl.sfdc.config.model.repository.TokenRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
