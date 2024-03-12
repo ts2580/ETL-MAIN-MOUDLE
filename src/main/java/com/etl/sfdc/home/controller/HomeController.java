@@ -1,8 +1,6 @@
 package com.etl.sfdc.home.controller;
 
-import com.etl.sfdc.user.common.UserSession;
-import com.etl.sfdc.user.model.dto.Member;
-import com.etl.sfdc.user.model.dto.UserAccount;
+import com.etl.sfdc.common.UserSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

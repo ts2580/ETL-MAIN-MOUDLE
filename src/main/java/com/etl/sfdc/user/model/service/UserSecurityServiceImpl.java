@@ -1,14 +1,13 @@
 package com.etl.sfdc.user.model.service;
 
-import com.etl.sfdc.user.common.UserRole;
-import com.etl.sfdc.user.common.UserSession;
+import com.etl.sfdc.common.UserRole;
+import com.etl.sfdc.common.UserSession;
 import com.etl.sfdc.user.model.dto.Member;
 import com.etl.sfdc.user.model.dto.UserAccount;
 import com.etl.sfdc.user.model.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

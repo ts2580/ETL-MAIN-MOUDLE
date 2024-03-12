@@ -1,4 +1,4 @@
-package com.etl.sfdc.user.common;
+package com.etl.sfdc.common;
 
 import jakarta.servlet.ServletException;
 import org.springframework.security.web.session.SessionInformationExpiredEvent;
