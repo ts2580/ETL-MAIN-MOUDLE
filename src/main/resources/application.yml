@@ -10,6 +10,6 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml
-  type-aliases-package: com.etl.sfdc.config.model.dto
+  type-aliases-package: com.etl.sfdc.user.model.dto
   configuration:
     mapUnderscoreToCamelCase: true
