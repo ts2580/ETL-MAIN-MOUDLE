@@ -91,13 +91,13 @@ public class TempServiceImpl implements TempService{
                 .build();
 
         Mono<String> responseMono = client
-                .get()                           // GET 요청
-                .uri(uri)                        // 추가 경로 지정, 필요하다면 쿼리 파라미터 포함
+                .get()
+                .uri(uri)
                 .httpRequest(httpRequest -> {
                     HttpClientRequest reactorRequest = httpRequest.getNativeRequest();
                     reactorRequest.responseTimeout(Duration.ofSeconds(10));
                 })
-                .retrieve()                      // response를 가져옴
+                .retrieve()
                 .bodyToMono(String.class);
 
         responseMono.subscribe(response -> {
