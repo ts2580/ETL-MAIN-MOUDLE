@@ -17,6 +17,14 @@ configurations {
     }
 }
 
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        if (details.requested.group == 'org.eclipse.jetty') {
+            details.useVersion '10.0.17'
+        }
+    }
+}
+
 bootJar {
 	mainClass = 'com.etl.sfdc.ETLApplication'
 }
@@ -42,6 +50,10 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+    implementation group: 'org.cometd.java', name: 'cometd-java-client', version: '4.0.4'
+    implementation group: 'org.eclipse.jetty', name: 'jetty-client', version: '10.0.17'
+    implementation group: 'org.eclipse.jetty', name: 'jetty-io', version: '10.0.17'
 }
 
 tasks.named('test') {
