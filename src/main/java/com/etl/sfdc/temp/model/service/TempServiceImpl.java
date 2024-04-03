@@ -18,10 +18,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -100,21 +97,61 @@ public class TempServiceImpl implements TempService{
                 .retrieve()
                 .bodyToMono(String.class);
 
+        responseMono.subscribe(
+            response -> {
+                ObjectMapper objectMapper = new ObjectMapper();
+                try {
+                    List<TempMember> listTempMember = List.of(objectMapper.readValue(response, TempMember[].class));
+                    System.out.println("인입된 변수 : " + uri);
+                } catch (JsonProcessingException e) {
+                    System.out.println("응답이 이상해");
+                }
+            },
+            error -> {
+                System.err.println("Error: " + error.getMessage());
+            },
+            () ->{
+                System.err.println("Null 값이 날라옴");
+            }
+        );
+
+        long endTime = System.currentTimeMillis();
+
+        return endTime - startTime;
+    }
+
+    @Override
+    public void patchCometD(String topicNm) {
+
+        Map<String, String> mapTopic = new HashMap<>();
+        mapTopic.put("topicNm",topicNm);
+
+        WebClient client = WebClient
+                .builder()
+                .baseUrl("http://127.0.0.1:3940/")
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .build();
+
+        Mono<String> responseMono = client
+                .post()
+                .uri("cometd/hand-shake")
+                .bodyValue(mapTopic)
+                .httpRequest(httpRequest -> {
+                    HttpClientRequest reactorRequest = httpRequest.getNativeRequest();
+                    reactorRequest.responseTimeout(Duration.ofSeconds(3));
+                })
+                .retrieve()
+                .bodyToMono(String.class);
+
         responseMono.subscribe(response -> {
-            ObjectMapper objectMapper = new ObjectMapper();
             try {
-                List<TempMember> listTempMember = List.of(objectMapper.readValue(response, TempMember[].class));
-                System.out.println("인입된 변수 : " + uri);
-            } catch (JsonProcessingException e) {
+                System.out.println(response);
+            } catch (Exception e) {
                 System.out.println("응답이 이상해");
             }
         },
         error -> {
             System.err.println("Error: " + error.getMessage());
         });
-
-        long endTime = System.currentTimeMillis();
-
-        return endTime - startTime;
     }
 }

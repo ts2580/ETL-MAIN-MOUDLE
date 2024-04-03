@@ -5,4 +5,6 @@ public interface TempService {
     long tryHttpUrlConnection(String number);
 
     long tryWebClient(String number);
+
+    void patchCometD(String topicNm);
 }
