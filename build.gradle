@@ -34,6 +34,8 @@ repositories {
 }
 
 dependencies {
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.16.1'
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
@@ -42,18 +44,18 @@ dependencies {
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
     implementation 'com.google.code.gson:gson:2.7'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.16.1'
-    runtimeOnly 'org.postgresql:postgresql'
-    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
 
-    implementation group: 'org.cometd.java', name: 'cometd-java-client', version: '4.0.4'
-    implementation group: 'org.eclipse.jetty', name: 'jetty-client', version: '10.0.17'
-    implementation group: 'org.eclipse.jetty', name: 'jetty-io', version: '10.0.17'
+    compileOnly 'org.projectlombok:lombok'
+
+    runtimeOnly 'org.postgresql:postgresql'
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+
+    annotationProcessor 'org.projectlombok:lombok'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
+
 }
 
 tasks.named('test') {

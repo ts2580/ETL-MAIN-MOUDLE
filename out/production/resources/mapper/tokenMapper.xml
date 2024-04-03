@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.etl.sfdc.config.model.repository.TokenRepository">
+
+    <select id="getToken" parameterType="com.etl.sfdc.config.model.dto.Token" resultType="com.etl.sfdc.config.model.dto.Token">
+        select  *
+        from token_info
+    </select>
+
+    <update id="setToken" parameterType="com.etl.sfdc.config.model.dto.Token">
+        UPDATE token_info
+        SET token_id = #{tokenId}
+        WHERE org_type = #{orgType}
+    </update>
+
+</mapper>
+
