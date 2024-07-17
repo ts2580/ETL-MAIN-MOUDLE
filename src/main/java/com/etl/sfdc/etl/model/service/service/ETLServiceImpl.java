@@ -127,7 +127,7 @@ public class ETLServiceImpl implements ETLService {
                 }else if (obj.ValueTypeId.equals("date")) {
                     DDL.append(obj.QualifiedApiName).append(" date comment '").append(obj.Label).append("',");
                 }else if (obj.ValueTypeId.equals("time")) {
-                    DDL.append(obj.QualifiedApiName).append(" time without time zone comment '").append(obj.Label).append("',");
+                    DDL.append(obj.QualifiedApiName).append(" time comment '").append(obj.Label).append("',");
                 }else if (obj.ValueTypeId.equals("double")) {
                     DDL.append(obj.QualifiedApiName).append(" double precision comment '").append(obj.Label).append("',");
                 }
@@ -135,6 +135,9 @@ public class ETLServiceImpl implements ETLService {
 
             DDL.deleteCharAt(DDL.length() - 1);
             DDL.append("); ");
+
+            System.out.println(DDL);
+
 
             // 테이블 만들기
             etlRepository.setFieldDef(DDL.toString());
