@@ -1,16 +1,14 @@
-package com.etl.sfdc.etl.model.service.service;
+package com.etl.sfdc.etl.service;
 
 import com.etl.sfdc.common.SalesforceOAuth;
 import com.etl.sfdc.common.UserSession;
-import com.etl.sfdc.etl.model.dto.Definition;
-import com.etl.sfdc.etl.model.dto.FieldDefinition;
-import com.etl.sfdc.etl.model.dto.ObjectDefinition;
-import com.etl.sfdc.etl.model.service.repository.ETLRepository;
+import com.etl.sfdc.etl.dto.FieldDefinition;
+import com.etl.sfdc.etl.dto.ObjectDefinition;
+import com.etl.sfdc.etl.repository.ETLRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.apache.http.util.EncodingUtils;
 import org.springframework.stereotype.Service;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;

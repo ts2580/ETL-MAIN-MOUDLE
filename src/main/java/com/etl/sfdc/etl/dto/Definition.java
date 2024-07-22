@@ -1,4 +1,4 @@
-package com.etl.sfdc.etl.model.dto;
+package com.etl.sfdc.etl.dto;
 
 import lombok.Data;
 
