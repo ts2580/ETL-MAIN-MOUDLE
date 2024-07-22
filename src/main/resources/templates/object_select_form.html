@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="eng">
+<head>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            border: none;
+        }
+
+        body{
+            font-size: 14px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .login-box{
+            display: grid;
+            justify-content: center;
+            min-height: 10vh;
+            margin-top: 2vh;
+        }
+
+        .login-box-line{
+            width: 50vw;
+        }
+
+        .book-list {
+            font-family: 'Arial', sans-serif;
+            overflow-x: auto;
+            margin: 20px;
+        }
+
+        .book-list > h2{
+            font-size: 24px;
+            color: #6A24FE;
+            margin-bottom: 20px;
+        }
+
+        #bookTable {
+            border-collapse: collapse;
+            border: 1px solid #444444;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        #bookTable th, #bookTable td {
+            text-align: left;
+            border: 1px solid #444444;
+            padding: 8px;
+        }
+
+        #bookTable th {
+            background-color: #6A24FE;
+            color: white;
+        }
+
+        #bookTable tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #bookTable tr:hover {
+            background-color: #ddd;
+        }
+
+        button {
+            margin-top: 1rem;
+            padding: 2px 12px;
+            box-sizing: border-box;
+            border-radius: 6px;
+            color: #fff;
+            background-color: #6A24FE;
+            font-size: 16px;
+            text-decoration-line: none;
+        }
+
+    </style>
+
+    <meta charset="UTF-8">
+    <title>ETL!</title>
+</head>
+<body>
+
+<div class="login-box">
+    <div class="login-box-line">
+        <div class="book-list">
+            <h2>오브젝트 선택</h2>
+            <form th:action="@{/etl/ddl}" method="post">
+                <div style="margin-bottom: 1rem; float: right" class="button">
+                    <button type="submit">Submit</button>
+                </div>
+                <table id="bookTable">
+                    <thead>
+                    <tr>
+                        <th>선택</th>
+                        <th>라벨명</th>
+                        <th>API명</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="object : ${objectDefinitions}">
+                            <td style="width: 2rem; text-align: center">
+                                <input type="checkbox" th:name="selectedObject" th:value="${object.name}"/>
+                            </td>
+                            <td style="width: 20rem;" th:text="${object.label}"></td>
+                            <td style="width: 20rem;" th:text="${object.name}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="float: right" class="button">
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+
+
+</div>
+
+</body>
+</html>
