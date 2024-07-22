@@ -1,9 +1,8 @@
 package com.etl.sfdc.etl.controller;
 
 import com.etl.sfdc.common.UserSession;
-import com.etl.sfdc.etl.model.dto.FieldDefinition;
-import com.etl.sfdc.etl.model.dto.ObjectDefinition;
-import com.etl.sfdc.etl.model.service.service.ETLService;
+import com.etl.sfdc.etl.dto.ObjectDefinition;
+import com.etl.sfdc.etl.service.ETLService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

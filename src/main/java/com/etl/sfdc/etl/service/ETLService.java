@@ -1,6 +1,6 @@
-package com.etl.sfdc.etl.model.service.service;
+package com.etl.sfdc.etl.service;
 
-import com.etl.sfdc.etl.model.dto.ObjectDefinition;
+import com.etl.sfdc.etl.dto.ObjectDefinition;
 
 import java.util.List;
 
