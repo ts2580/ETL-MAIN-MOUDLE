@@ -6,13 +6,10 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FieldDefinition {
-    public String Id;
-    public String EntityDefinitionId;
-    public String DeveloperName;
-    public String QualifiedApiName;
-    public String Label;
-    public String Length;
-    public String DataType;
-    public String ValueTypeId;
-    public String IsIndexed;
+    public String name;             // 필드 API
+    public String type;             // 필드 라벨
+    public String label;            // type
+    public String length;           // Text 계열 필드일 때 길이
+    public String precision;        // Number일 때 길이
+    public String scale;            // Number일 때 소숫점 자릿수
 }
