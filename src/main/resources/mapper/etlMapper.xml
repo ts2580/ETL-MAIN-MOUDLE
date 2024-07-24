@@ -7,5 +7,13 @@
         ${DDL}
     </select>
 
+    <!-- #은 Object를 받을 때. 문자열은 $로 처리-->
+    <insert id="insertObject">
+        ${upperQuery}
+        <foreach item="record" collection="listUnderQuery" separator=",">
+            ${record}
+        </foreach>
+    </insert>
+
 </mapper>
 
