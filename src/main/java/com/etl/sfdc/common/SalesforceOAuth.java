@@ -17,8 +17,6 @@ public class SalesforceOAuth {
     private static final String USERNAME = "admin@ecologysyncmanagementco.kr.dev";
     private static final String PASSWORD = "qwer1234!!NLIi077LCt55mBjVM5AJKyTH";
 
-
-
     public static String getAccessToken() throws Exception {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpPost post = new HttpPost(LOGIN_URL);
