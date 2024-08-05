@@ -61,10 +61,7 @@ public class ETLServiceImpl implements ETLService {
     @Override
     public void setObjects(String selectedObject) throws Exception {
 
-        // 잭슨
         ObjectMapper objectMapper = new ObjectMapper();
-
-        Map<String, String> mapProperty = getProprtyMap(selectedObject);
 
         OkHttpClient client = new OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
@@ -72,15 +69,18 @@ public class ETLServiceImpl implements ETLService {
             .writeTimeout(30, TimeUnit.SECONDS)
             .build();
 
-        RequestBody formBody = new FormBody.Builder()
-                .addEncoded("mapProperty", objectMapper.writeValueAsString(mapProperty))
-                .build();
+        // Map 만들고 잭슨으로 직렬화
+        String json = objectMapper.writeValueAsString(getProprtyMap(selectedObject));
 
-        // Map 만들고 잭슨으로 직렬화 하기 싫어서 x-www-form-urlencoded로 보냄
+        RequestBody formBody = RequestBody.create(
+                json, MediaType.get("application/json; charset=utf-8")
+        );
+
+        // x-www-form-urlencoded 말고 얌전히 json 보내자
         Request request = new Request.Builder()
                 .url("http://127.0.0.1:3931/apache/pushtopic")
-                .method("POST", formBody)
-                .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                .post(formBody)
+                .addHeader("Content-Type", "application/json")
                 .build();
 
         try(Response response = client.newCall(request).execute()) {
