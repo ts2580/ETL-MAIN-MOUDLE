@@ -78,7 +78,7 @@ public class ETLServiceImpl implements ETLService {
 
         // x-www-form-urlencoded 말고 얌전히 json 보내자
         Request request = new Request.Builder()
-                .url("http://127.0.0.1:3931/apache/pushtopic")
+                .url("http://127.0.0.1:3931/router/pubsub")
                 .post(formBody)
                 .addHeader("Content-Type", "application/json")
                 .build();
@@ -90,7 +90,6 @@ public class ETLServiceImpl implements ETLService {
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-
     }
 
     private static @NotNull Map<String, String> getProprtyMap(String selectedObject) {
