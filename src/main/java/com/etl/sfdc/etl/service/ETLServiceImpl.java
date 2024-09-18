@@ -61,10 +61,7 @@ public class ETLServiceImpl implements ETLService {
     @Override
     public void setObjects(String selectedObject) throws Exception {
 
-        // 잭슨
         ObjectMapper objectMapper = new ObjectMapper();
-
-        Map<String, String> mapProperty = getProprtyMap(selectedObject);
 
         OkHttpClient client = new OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
@@ -72,15 +69,18 @@ public class ETLServiceImpl implements ETLService {
             .writeTimeout(30, TimeUnit.SECONDS)
             .build();
 
-        RequestBody formBody = new FormBody.Builder()
-                .addEncoded("mapProperty", objectMapper.writeValueAsString(mapProperty))
-                .build();
+        // Map 만들고 잭슨으로 직렬화
+        String json = objectMapper.writeValueAsString(getProprtyMap(selectedObject));
 
-        // Map 만들고 잭슨으로 직렬화 하기 싫어서 x-www-form-urlencoded로 보냄
+        RequestBody formBody = RequestBody.create(
+                json, MediaType.get("application/json; charset=utf-8")
+        );
+
+        // x-www-form-urlencoded 말고 얌전히 json 보내자
         Request request = new Request.Builder()
-                .url("http://127.0.0.1:3931/apache/pushtopic")
-                .method("POST", formBody)
-                .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                .url("http://127.0.0.1:3931/pubsub")
+                .post(formBody)
+                .addHeader("Content-Type", "application/json")
                 .build();
 
         try(Response response = client.newCall(request).execute()) {
@@ -90,7 +90,6 @@ public class ETLServiceImpl implements ETLService {
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-
     }
 
     private static @NotNull Map<String, String> getProprtyMap(String selectedObject) {
@@ -99,7 +98,7 @@ public class ETLServiceImpl implements ETLService {
         mapProperty.put("client_id","3MVG9q4K8Dm94dAwF6D70zsfWDZO2vEz0CCf0bQtywOlbgdghIYL0JLpyG2HP5bvUkV5Lm1B.4bZE0z6pkVu3");
         mapProperty.put("client_secret","A532570413C1AB3952E7CEDEBDBFF0735651F2F8011B093C8CE03A646FF9AD0A");
         mapProperty.put("username","admin@ecologysyncmanagementco.kr.dev");
-        mapProperty.put("password","qwer1234!!NLIi077LCt55mBjVM5AJKyTH");
+        mapProperty.put("password","qwer1234!t9IOoeW2u0GeELmPoVh4BOmh");
         mapProperty.put("instanceUrl","https://ecologysyncmanagement-dev-ed.develop.my.salesforce.com");
         mapProperty.put("selectedObject", selectedObject);
 
