@@ -1,97 +1,133 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="eng">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head>
+    <meta charset="UTF-8">
+    <title>ETL 로그인</title>
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
     <style>
-
-        *{
-            padding: 0;
+        * {
+            box-sizing: border-box;
             margin: 0;
-            border: none;
+            padding: 0;
         }
 
-        body{
-            font-size: 14px;
-            font-family: 'Roboto', sans-serif;
+        html, body {
+            width: 100vw;
+            height: 100vh;
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            background-color: #f4f4f8;
+            color: #333;
+            font-size: 1.1vw;
         }
 
-        .login-box{
+        .login-box {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 10vh;
-            margin-top: 30vh;
+            width: 100vw;
+            height: 100vh;
+            padding: 2vh;
         }
 
-        .login-wrapper{
-            width: 400px;
-            height: 350px;
-            padding: 40px;
-            box-sizing: border-box;
+        .login-wrapper {
+            width: 28vw;
+            min-width: 320px;
+            background: white;
+            border-radius: 1vw;
+            box-shadow: 0 0.5vw 2vw rgba(0, 0, 0, 0.1);
+            padding: 4vh 3vw;
         }
 
-        .login-wrapper > h2{
-            font-size: 24px;
+        .login-wrapper h2 {
+            font-size: 2vw;
             color: #6A24FE;
-            margin-bottom: 20px;
+            margin-bottom: 2vh;
+            text-align: center;
         }
 
-        #login-form > input{
+        #login-form input {
             width: 100%;
-            height: 48px;
-            padding: 0 10px;
-            box-sizing: border-box;
-            margin-bottom: 16px;
-            border-radius: 6px;
-            background-color: #F8F8F8;
+            height: 3.2vw;
+            min-height: 48px;
+            padding: 0 1vw;
+            margin-bottom: 1.4vh;
+            border-radius: 0.5vw;
+            border: 1px solid #ddd;
+            background-color: #FAFAFA;
+            font-size: 1vw;
+            transition: all 0.2s ease;
         }
 
-        #login-form > input::placeholder{
-            color: #D2D2D2;
+        #login-form input::placeholder {
+            color: #bbb;
         }
 
-        #login-form > input[type="submit"]{
-            color: #fff;
-            font-size: 16px;
+        #login-form input:focus {
+            outline: none;
+            border: 1px solid #6A24FE;
+            background-color: #fff;
+        }
+
+        #login-form input[type="submit"] {
             background-color: #6A24FE;
-            margin-top: 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1vw;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        #login-form > label{
-            color: #999999;
+        #login-form input[type="submit"]:hover {
+            background-color: #5520d9;
         }
 
-        .alert > div{
-            color: fuchsia;
-            margin-bottom: 5px;
+        .alert div {
+            color: crimson;
+            font-size: 0.9vw;
+            margin-bottom: 1vh;
+            text-align: center;
         }
 
+        p {
+            margin-top: 2vh;
+            text-align: center;
+            font-size: 1vw;
+        }
+
+        p a {
+            color: #6A24FE;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        p a:hover {
+            text-decoration: underline;
+        }
     </style>
-
-    <meta charset="UTF-8">
-    <title>ETL!</title>
 </head>
 <body>
 
 <div class="login-box">
     <div class="login-wrapper">
         <h2>Login</h2>
+
         <div th:if="${param.error}" class="alert">
-            <div th:if="${param.error.contains('login')}" >
+            <div th:if="${param.error.contains('login')}">
                 사용자ID 또는 비밀번호를 확인해 주세요.
             </div>
             <div th:if="${param.error.contains('session')}">
                 중복 로그인이 감지되어 세션이 만료되었습니다.
             </div>
         </div>
-        <!--/user/login 받는 POST 메서드 필요 없음. SecurityConfig에 로그인 페이지로 지정했기 때문에 알아서 UserSecurityService로 납치해감-->
+
         <form method="post" id="login-form" th:action="@{/user/login}">
             <input type="text" name="username" id="username" placeholder="아이디">
             <input type="password" name="password" id="password" placeholder="비밀번호">
-            <input type="submit" id="submit">
+            <input type="submit" value="로그인">
         </form>
-        <p>Don't have an account? <a href="/user/signup">Sign up</a></p>
+
+        <p>계정이 없으신가요? <a href="/user/signup">회원가입</a></p>
     </div>
 </div>
 
