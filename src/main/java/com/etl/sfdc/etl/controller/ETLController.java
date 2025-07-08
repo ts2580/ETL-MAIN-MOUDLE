@@ -3,6 +3,8 @@ package com.etl.sfdc.etl.controller;
 import com.etl.sfdc.common.UserSession;
 import com.etl.sfdc.etl.dto.ObjectDefinition;
 import com.etl.sfdc.etl.service.ETLService;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -24,9 +27,16 @@ public class ETLController {
     private final ETLService etlService;
 
     @GetMapping("/objects")
-    public String getObjects(Model model) throws Exception {
+    public String getObjects(Model model, HttpSession session, HttpServletResponse response) throws Exception {
 
-        List<ObjectDefinition> objectDefinitions = etlService.getObjects();
+        String accessToken = (String) session.getAttribute("accessToken");
+
+        if (accessToken == null) {
+            response.sendRedirect("/login");
+            return null;
+        }
+
+        List<ObjectDefinition> objectDefinitions = etlService.getObjects(accessToken);
 
         if(userSession.getUserAccount() != null){
             model.addAttribute(userSession.getUserAccount().getMember());
@@ -38,14 +48,16 @@ public class ETLController {
     }
 
     @PostMapping("/ddl")
-    public String setObjects(@RequestParam("selectedObject") String selectedObject, Model model, RedirectAttributes redirectAttributes) throws Exception {
+    public String setObjects(@RequestParam("selectedObject") String selectedObject, Model model, HttpSession session) throws Exception {
 
+        String accessToken = (String) session.getAttribute("accessToken");
+        String refreshToken = (String) session.getAttribute("refreshToken");
 
         if(userSession.getUserAccount() != null){
             model.addAttribute(userSession.getUserAccount().getMember());
         }
 
-        etlService.setObjects(selectedObject);
+        etlService.setObjects(selectedObject, accessToken, refreshToken);
 
         return "home_form";
     }

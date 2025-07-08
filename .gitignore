@@ -5,6 +5,9 @@
 /dataSources/
 /dataSources.local.xml
 
+out/
+src/main/resources/application.yml
+
 ### Gradle ###
 # Exclude Folder List #
 .gradle/

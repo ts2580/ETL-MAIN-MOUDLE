@@ -69,6 +69,7 @@
             <div sec:authorize="hasAuthority('ROLE_USER')">* 당신의 권한은 "사용자"입니다</div>
             <div class="button">
                 <a th:href="@{/user/logout}">Logout</a>
+                <a th:href="@{/login}">세일즈포스 로그인</a>
                 <a th:href="@{/etl/objects}">테이블 선택 시퀸스</a>
             </div>
         </div>
