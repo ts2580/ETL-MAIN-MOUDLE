@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ETLService {
 
-    List<ObjectDefinition> getObjects() throws Exception;
+    List<ObjectDefinition> getObjects(String accessToken) throws Exception;
 
-    void setObjects(String selectedObject) throws Exception;
+    void setObjects(String selectedObject, String accessToken, String refreshToken) throws Exception;
 }

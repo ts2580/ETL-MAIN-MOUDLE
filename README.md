@@ -1,4 +1,4 @@
-# Ecology-Sync-Management
+# ETL-MAIN-MODULE
 Salesforce ETL 프로젝트. 메인 관리모듈. Spring Security를 이용하여 사용자 관리. 세일즈포스 Auth 관리.
 
 * Language   : Java 17

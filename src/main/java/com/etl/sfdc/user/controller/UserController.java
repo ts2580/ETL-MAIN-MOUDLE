@@ -1,6 +1,5 @@
 package com.etl.sfdc.user.controller;
 
-import com.etl.sfdc.config.model.service.TokenService;
 import com.etl.sfdc.user.model.dto.UserCreateForm;
 import com.etl.sfdc.user.model.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -18,7 +17,6 @@ import jakarta.validation.Valid;
 public class UserController {
 
     private final UserService userService;
-    private final TokenService tokenService;
 
     @GetMapping("/login")
     public String loginPage() {
