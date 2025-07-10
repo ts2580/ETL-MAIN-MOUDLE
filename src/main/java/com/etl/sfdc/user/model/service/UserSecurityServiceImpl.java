@@ -33,7 +33,7 @@ public class UserSecurityServiceImpl implements UserSecurityService, UserDetails
             throw new UsernameNotFoundException("사용자를 찾을수 없습니다.");
         }
 
-        // 일단 한성진 유저인 경우레 어드민 권한 부여
+        // 일단 한성진 유저인 경우에 어드민 권한 부여
         List<GrantedAuthority> authorities = new ArrayList<>();
         if ("한성진".equals(username)) {
             authorities.add(new SimpleGrantedAuthority(UserRole.ADMIN.getValue()));
