@@ -38,6 +38,8 @@ public class ETLServiceImpl implements ETLService {
             if (response.isSuccessful()) {
                 String responseBody = response.body().string();
 
+                System.out.println("responseBody ==> " + responseBody);
+
                 // 잭슨으로 역직렬화
                 ObjectMapper objectMapper = new ObjectMapper();
 
@@ -81,7 +83,7 @@ public class ETLServiceImpl implements ETLService {
         // x-www-form-urlencoded 말고 얌전히 json 보내자
         // 도커 네트워크 대역으로. 게이트웨이에 요청 보낸다.
         Request request = new Request.Builder()
-                .url("http://127.17.0.1:3931/streaming")
+                .url("http://127.0.0.1:3931/streaming")
                 .post(formBody)
                 .addHeader("Content-Type", "application/json")
                 .build();
