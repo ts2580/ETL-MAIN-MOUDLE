@@ -45,7 +45,6 @@ public class UserController {
             bindingResult.rejectValue("password2", "passwordInCorrect", "2개의 패스워드가 일치하지 않습니다.");
             return "signup_form";
         }*/
-        //TEST 삭제 필요.확인용 yk.kim
 
         userService.create(userCreateForm.getUsername(),
                 userCreateForm.getEmail(), userCreateForm.getPassword1(), userCreateForm.getDescription());
