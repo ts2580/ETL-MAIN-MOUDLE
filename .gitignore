@@ -6,15 +6,14 @@
 /dataSources.local.xml
 
 out/
-src/main/resources/application.yml
 
 ### Gradle ###
 # Exclude Folder List #
 .gradle/
-gradle/
 build/
-gradlew
-gradlew.bat
+#gradle/
+#gradlew
+#gradlew.bat
 
 ### IntelliJ ###
 *.iml

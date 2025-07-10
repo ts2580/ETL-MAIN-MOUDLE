@@ -11,6 +11,14 @@ java {
     sourceCompatibility = '17'
 }
 
+bootJar{
+    destinationDirectory = file("./target")
+    archivesBaseName = 'yuri'
+    archiveFileName = 'yuri.jar'
+    archiveVersion = "0.0.1"
+    mainClass = 'com.etl.sfdc.ETLApplication'
+}
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
@@ -18,10 +26,6 @@ configurations {
     configureEach {
         exclude group: 'commons-logging', module: 'commons-logging'
     }
-}
-
-bootJar {
-	mainClass = 'com.etl.sfdc.ETLApplication'
 }
 
 repositories {
