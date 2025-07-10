@@ -1,76 +1,123 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org"
-      lang="eng">
+      lang="ko">
 <head>
+    <meta charset="UTF-8">
+    <title>ETL 서버</title>
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <style>
-        *{
-            padding: 0;
+        * {
+            box-sizing: border-box;
             margin: 0;
-            border: none;
+            padding: 0;
         }
 
-        body{
-            font-size: 14px;
-            font-family: 'Roboto', sans-serif;
+        html, body {
+            width: 100vw;
+            height: 100vh;
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            background-color: #f4f4f8;
+            color: #333;
+            font-size: 1.2vw;
         }
 
-        .login-box{
+        .container {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 10vh;
-            margin-top: 30vh;
+            width: 100vw;
+            height: 100vh;
+            padding: 2vh;
         }
 
-        .login-wrapper{
-            width: 60vh;
-            box-sizing: border-box;
+        .card {
+            width: 50vw;
+            min-width: 320px;
+            background: #fff;
+            border-radius: 1vw;
+            box-shadow: 0 0.5vw 2vw rgba(0, 0, 0, 0.1);
+            padding: 5vh 4vw;
+            text-align: center;
         }
 
-        .login-wrapper > h2{
-            font-size: 24px;
+        .card h2 {
+            font-size: 2vw;
             color: #6A24FE;
-            margin-bottom: 20px;
+            margin-bottom: 3vh;
         }
 
-        .button{
-            margin-top: 4px;
+        .info {
+            margin: 1.5vh 0;
+            font-size: 1.2vw;
         }
 
-        .button > a{
-            padding: 2px 12px;
-            box-sizing: border-box;
-            border-radius: 6px;
-            color: #fff;
+        .info a {
+            color: #6A24FE;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .info a:hover {
+            text-decoration: underline;
+        }
+
+        .status {
+            font-size: 1.3vw;
+            font-weight: 500;
+            margin-bottom: 1.5vh;
+        }
+
+        .role {
+            font-size: 1vw;
+            color: #888;
+            margin-bottom: 3vh;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 1.5vw;
+            flex-wrap: wrap;
+            margin-top: 2vh;
+        }
+
+        .button-group a {
+            padding: 1vh 2vw;
             background-color: #6A24FE;
-            font-size: 16px;
-            text-decoration-line: none;
+            color: white;
+            border-radius: 0.6vw;
+            font-size: 1vw;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
         }
 
+        .button-group a:hover {
+            background-color: #5520d9;
+        }
     </style>
-    <meta charset="UTF-8">
-    <title>ETL!</title>
 </head>
 <body>
 
-<div class="login-box">
-    <div class="login-wrapper">
+<div class="container">
+    <div class="card">
         <h2>세일즈포스 RDBMS ETL 서버 시작!</h2>
 
         <div sec:authorize="isAnonymous()">
-            <div>Have an account? <a th:href="@{/user/login}">Login</a></div>
-            <div>Don't have an account? <a th:href="@{/user/signup}">Sign up</a></div>
+            <div class="info">계정이 있으신가요? <a th:href="@{/user/login}">로그인</a></div>
+            <div class="info">계정이 없으신가요? <a th:href="@{/user/signup}">회원가입</a></div>
         </div>
+
         <div sec:authorize="isAuthenticated()">
-            <div>* [[${member.getUsername()}]]([[${member.getDescription}]]) 인증 되었습니다</div>
-            <div sec:authorize="hasAuthority('ROLE_ADMIN')">* 당신의 권한은 "관리자"입니다</div>
-            <div sec:authorize="hasAuthority('ROLE_USER')">* 당신의 권한은 "사용자"입니다</div>
-            <div class="button">
-                <a th:href="@{/user/logout}">Logout</a>
+            <div class="status">[[${member.getUsername()}]] ([[${member.getDescription()}]])님 인증되었습니다.</div>
+            <div class="role" sec:authorize="hasAuthority('ROLE_ADMIN')">당신의 권한: 관리자</div>
+            <div class="role" sec:authorize="hasAuthority('ROLE_USER')">당신의 권한: 사용자</div>
+
+            <div class="button-group">
+                <a th:href="@{/user/logout}">로그아웃</a>
                 <a th:href="@{/login}">세일즈포스 로그인</a>
-                <a th:href="@{/etl/objects}">테이블 선택 시퀸스</a>
+                <a th:href="@{/etl/objects}">테이블 선택</a>
             </div>
         </div>
     </div>
