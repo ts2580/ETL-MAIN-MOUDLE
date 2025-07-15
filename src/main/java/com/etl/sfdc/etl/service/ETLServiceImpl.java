@@ -21,6 +21,9 @@ public class ETLServiceImpl implements ETLService {
     @Value("${salesforce.myDomain}")
     private String myDomain;
 
+    @Value(("${aws.albUri}"))
+    private String albUri;
+
     @Override
     public List<ObjectDefinition> getObjects(String accessToken) throws Exception {
 
@@ -83,7 +86,7 @@ public class ETLServiceImpl implements ETLService {
         // x-www-form-urlencoded 말고 얌전히 json 보내자
         // 도커 네트워크 대역으로. 게이트웨이에 요청 보낸다.
         Request request = new Request.Builder()
-                .url("http://127.0.0.1:3931/streaming")
+                .url(albUri + ":3931/streaming")
                 .post(formBody)
                 .addHeader("Content-Type", "application/json")
                 .build();
